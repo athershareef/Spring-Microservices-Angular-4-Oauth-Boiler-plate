@@ -1,0 +1,21 @@
+
+<div class="row">
+  <div class="col-xs-6 col-sm-5 col-md-3 col-md-offset-2">
+    <form (ngSubmit)="onSignIn(f)" #f="ngForm">
+      <div class="form-group">
+        <label for="email">Mail</label>
+        <input type="email" id="email" name="email" ngModel class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" ngModel class="form-control">
+      </div>
+      <button class="btn btn-primary" type="submit">Sign In</button>
+      <button class="btn btn-default" routerLink="/signup">Sign Up Here</button>
+    </form>
+  </div>
+  <div class="col-xs-4 col-sm-5 col-md-3 col-md-offset-2" style="padding: 50px">
+    <app-google-signin></app-google-signin>
+  </div>
+</div>
+
