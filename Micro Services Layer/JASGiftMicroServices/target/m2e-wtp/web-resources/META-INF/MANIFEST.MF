@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: JASGiftMicroServices
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: ather
+Implementation-Vendor-Id: com.gift
+Build-Jdk: 1.8.0_131
+Implementation-URL: http://projects.spring.io/spring-boot/JASGiftMicro
+ Services/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
