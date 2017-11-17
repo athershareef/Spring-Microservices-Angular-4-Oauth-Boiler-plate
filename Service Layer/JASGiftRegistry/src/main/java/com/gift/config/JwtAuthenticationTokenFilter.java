@@ -80,7 +80,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 				final String signUpHeader = request.getHeader("Signup");
 				System.out.println("Signup " + signUpHeader);
 
-				if (signUpHeader.equalsIgnoreCase("true")) {
+				if (signUpHeader != null && signUpHeader.equalsIgnoreCase("true")) {
 					RestTemplate restTemplate = new RestTemplate();
 
 					User newUser = new User(username, email, new BCryptPasswordEncoder().encode(defaultPassword));
