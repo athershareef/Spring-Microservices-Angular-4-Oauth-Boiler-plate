@@ -2,8 +2,8 @@
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success" type="submit" [disabled]="userForm.invalid">Save</button>
-        <button class="btn btn-danger" type="button" routerLink="../">Cancel</button>
+        <button class="btn btn-success" type="submit" [disabled]="userForm.invalid">Update details</button>
+        <button class="btn btn-danger" type="button" routerLink="/home">Cancel</button>
       </div>
     </div>
     <div class="form-group">
@@ -17,11 +17,6 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" formControlName="password" class="form-control">
-    </div>
-    <div class="row">
-      <div class="col col-xs-4 col col-xs-offset-2 col-md-offset-2">
-        <button class="btn btn-primary" type="submit">Update details</button>
-      </div>
     </div>
   </form>
 </div>

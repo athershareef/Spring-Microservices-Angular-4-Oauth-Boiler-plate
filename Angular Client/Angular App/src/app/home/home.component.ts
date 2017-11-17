@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GiftComService} from '../services/gift-com.service';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {User} from '../model/user';
 
@@ -8,53 +7,20 @@ import {User} from '../model/user';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-
-  user: User;
+export class HomeComponent implements OnInit {
 
   loggedIn = false;
+  user: User;
 
 
-  constructor(private giftComService: GiftComService, private authService: AuthService) {
-    console.log('in Home Constructor' + this.loggedIn);
-
-    if (this.loggedIn === false && localStorage.getItem('loggedIn') === 'true') {
-      this.giftComService.getCurrentUser().subscribe((user: User) => {
-          this.loggedIn = true;
-          this.user = user;
-          this.authService.user = this.user;
-          this.authService.userChange.next(user);
-        },
-        error => {
-          console.log(error);
-          this.loggedIn = false;
-          this.authService.user = new User('', '', '');
-          this.authService.userChange.next(new User('', '', ''));
-        }
-      );
-    }
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
+    this.user = this.authService.user;
+    this.loggedIn = this.authService.loggedIn;
     if (this.loggedIn === false && localStorage.getItem('loggedIn') === 'true') {
-      this.giftComService.getCurrentUser().subscribe((user: User) => {
-          this.loggedIn = true;
-          this.user = user;
-          this.authService.user = this.user;
-          this.authService.userChange.next(user);
-        },
-        error => {
-          console.log(error);
-          this.loggedIn = false;
-          this.authService.user = new User('', '', '');
-          this.authService.userChange.next(new User('', '', ''));
-        }
-      );
+      this.authService.getCurrentUser();
     }
-  }
-
-  ngOnDestroy(): void {
-    console.log('in Home Destroy' + this.loggedIn);
-    // this.userChangeSubs.unsubscribe();
   }
 }

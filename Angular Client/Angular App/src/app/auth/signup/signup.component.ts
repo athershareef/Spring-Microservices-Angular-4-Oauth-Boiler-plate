@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {User} from '../../model/user';
-import {GiftComService} from '../../services/gift-com.service';
-import {Router} from "@angular/router";
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private giftComService: GiftComService, private router: Router) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -19,14 +18,6 @@ export class SignupComponent implements OnInit {
 
   onSignUp(form: NgForm) {
     const user = new User(form.value.username, form.value.email, form.value.password);
-    this.giftComService.signUpUser(user).subscribe(
-      (response: Response) => {
-        console.log(response);
-        this.router.navigate(['/login']);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.authService.signUpUser(user);
   }
 }

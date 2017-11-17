@@ -15,7 +15,7 @@ import {AuthService} from './auth/auth.service';
 import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./auth/auth.guard";
-import { UserEditComponent } from './auth/user-edit/user-edit.component';
+import {UserEditComponent} from './auth/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [

@@ -23,7 +23,6 @@ export class GiftComService {
     });
     headers.append('Content-Type', 'application/json');
 
-    console.log(headers);
     return this.http.post(this.ServerURL + '/login', null, {headers: headers, withCredentials: true});
   }
 
@@ -40,7 +39,6 @@ export class GiftComService {
     });
     headers.append('Content-Type', 'application/json');
 
-    console.log(headers);
     return this.http.post(this.ServerURL + '/login', null, {headers: headers, withCredentials: true});
 
   }
@@ -55,11 +53,6 @@ export class GiftComService {
     return this.http.get(this.ServerURL + '/logout', {withCredentials: true});
   }
 
-
-  getGoogleOauth() {
-    return this.ServerURL + this.authURL;
-  }
-
   validateGoogleOAuth(token) {
     const headers = new HttpHeaders({
       // 'Content-Type': 'application/w-www-form-urlencoded',
@@ -68,7 +61,6 @@ export class GiftComService {
     });
     headers.append('Content-Type', 'application/json');
 
-    console.log(headers);
     return this.http.post(this.ServerURL + '/login', null, {headers: headers, withCredentials: true});
   }
 
