@@ -3,40 +3,35 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {DropdownDirective} from './misc/dropdown.directive';
-import {AppRoutingModule} from './app-routing.module';
-import {AuthComponent} from './auth/auth.component';
-import {SigninComponent} from './auth/signin/signin.component';
-import {SignupComponent} from './auth/signup/signup.component';
-import {GoogleSigninComponent} from './auth/signin/google-signin/google-signin.component';
-import {GiftComService} from './services/gift-com.service';
-import {HttpClientModule} from '@angular/common/http';
+import {ShoppingListService} from './shopping-list/shopping-list.service';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {AppRoutingModule} from "./app-routing.module";
+import {RecipeService} from './recipes/recipe.service';
+import {DataStorageService} from './shared/data-storage.service';
 import {AuthService} from './auth/auth.service';
+import {AuthGuard} from './auth/auth.guard';
+import {SharedModule} from "./shared/shared.module";
+import {ShoppingListModule} from "./shopping-list/shopping-list.module";
+import {AuthModule} from "./auth/auth.module";
 import {HomeComponent} from './home/home.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthGuard} from "./auth/auth.guard";
-import {UserEditComponent} from './auth/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    DropdownDirective,
-    AuthComponent,
-    SigninComponent,
-    SignupComponent,
-    GoogleSigninComponent,
-    HomeComponent,
-    UserEditComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    HttpModule,
+    AppRoutingModule,
+    ShoppingListModule,
+    AuthModule,
+    SharedModule
   ],
-  providers: [GiftComService, AuthService, AuthGuard],
+  providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

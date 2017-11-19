@@ -1,41 +1,35 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {User} from '../model/user';
-import {Subscription} from 'rxjs/Subscription';
+import {Component} from '@angular/core';
+import {DataStorageService} from "../shared/data-storage.service";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  user: User;
-  loggedIn = false;
-  userChangeSubs: Subscription;
+export class HeaderComponent {
 
-
-  constructor(private authService: AuthService) {
+  constructor(private storageService: DataStorageService, private authService: AuthService) {
   }
 
-  ngOnInit() {
-    console.log('in Header Init' + this.loggedIn)
-    this.userChangeSubs = this.authService.userChange.subscribe((user: User) => {
-      this.user = user;
-      if (user.email === '') {
-        this.loggedIn = false;
-      } else {
-        this.loggedIn = true;
-      }
-    });
-    console.log('in Header Cons Init' + this.loggedIn);
+  onSaveData() {
+    this.storageService.storeRecipes()
+      .subscribe((response) => {
+          alert('Data saved to firebase !');
+        },
+        (error) => {
+          alert('Unable to Save Data');
+        });
   }
 
-  onSignOut() {
-    this.authService.signOutUser();
+  onFetchData() {
+    this.storageService.getRecipes();
   }
 
-  ngOnDestroy(): void {
-    this.userChangeSubs.unsubscribe();
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
   }
 
+  onLogout() {
+    this.authService.logout();
+  }
 }

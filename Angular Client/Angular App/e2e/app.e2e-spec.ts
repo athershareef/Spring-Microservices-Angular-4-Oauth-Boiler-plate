@@ -1,6 +1,6 @@
-import { AppPage } from './app.po';
+import {AppPage} from './app.po';
 
-describe('gift-registry App', () => {
+describe('angular-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
