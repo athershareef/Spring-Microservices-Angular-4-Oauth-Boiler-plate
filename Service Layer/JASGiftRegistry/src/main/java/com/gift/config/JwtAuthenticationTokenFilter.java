@@ -32,7 +32,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	private static final String defaultPassword = "password";
 
 	public JwtAuthenticationTokenFilter(UserDetailsServiceImpl userDetailsService) {
-		// TODO Auto-generated constructor stub
 		this.userDetailsService = userDetailsService;
 	}
 
@@ -55,7 +54,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			if (status.is2xxSuccessful()) {
 				String userDetails = googleResponse.getBody();
 
-				System.out.println("User De " + userDetails);
 				ObjectMapper mapper = new ObjectMapper();
 
 				JsonNode root = mapper.readTree(userDetails);
@@ -63,11 +61,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 				email = root.path("email").toString().replace("\"", "").trim();
 				username = root.path("name").toString().replace("\"", "").trim();
 
-				System.out.println("Yay ! email " + email + " " + username);
 			} else {
-				System.out.println("Google token invalid or expired");
+				logger.info("Google token invalid or expired");
 			}
-			System.out.println("Status " + googleResponse.getStatusCode());
+			logger.info("Status " + googleResponse.getStatusCode());
 
 		} else {
 			logger.info("couldn't find bearer string, will ignore the header");

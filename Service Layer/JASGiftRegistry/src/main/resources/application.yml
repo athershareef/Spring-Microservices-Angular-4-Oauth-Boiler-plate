@@ -31,7 +31,18 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: 'true'
-    
+  mail:
+   host: smtp.gmail.com
+   username: athershareefvce44@gmail.com
+   password: devtest44
+   properties:
+     mail:
+       smtp:
+         auth: true
+         socketFactory:
+           port: 465
+           class: javax.net.ssl.SSLSocketFactory
+           fallback: false
 logging:
   level:
     root: debug

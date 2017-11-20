@@ -70,10 +70,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// We can specify our authorization criteria inside this method.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().cors().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/", "/login")
-				.permitAll().antMatchers("/create", "/login", "/signout").permitAll().anyRequest().authenticated().and()
-				.httpBasic().and().logout().clearAuthentication(true).logoutSuccessUrl("/signout")
-				.deleteCookies("JSESSIONID").invalidateHttpSession(true).and()
+		http.csrf().disable().cors().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/", "/user/login")
+				.permitAll().antMatchers("/user/create", "/user/login", "/user/signout", "/user/forgot").permitAll()
+				.anyRequest().authenticated().and().httpBasic().and().logout().clearAuthentication(true)
+				.logoutSuccessUrl("/user/signout").deleteCookies("JSESSIONID").invalidateHttpSession(true).and()
 				.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
 				.addFilterAt(filter(), BasicAuthenticationFilter.class);
 
