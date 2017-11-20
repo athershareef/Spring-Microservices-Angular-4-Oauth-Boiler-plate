@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {User} from '../../model/user';
@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnDestroy {
   userForm: FormGroup;
   user: User;
   loggedIn = false;
@@ -24,7 +24,6 @@ export class UserEditComponent implements OnInit {
     this.userChangeSubs = this.authService.userChange.subscribe((user: User) => {
       console.log('Edit change fired');
       if (user.username !== '') {
-        console.log('Edit change fired');
         this.user = user;
         this.loggedIn = true;
       }
@@ -45,5 +44,10 @@ export class UserEditComponent implements OnInit {
     this.user = new User(this.userForm.value.username, this.userForm.value.email, this.userForm.value.password, this.user.userId);
     this.authService.updateUser(this.user);
   }
+
+  ngOnDestroy(): void {
+    this.userChangeSubs.unsubscribe();
+  }
+
 
 }
