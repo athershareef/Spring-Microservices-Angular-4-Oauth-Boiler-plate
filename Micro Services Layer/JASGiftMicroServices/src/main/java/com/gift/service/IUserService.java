@@ -11,6 +11,8 @@ public interface IUserService {
 
 	User getUserById(long id);
 
+	User getUserByEmail(String email);
+
 	User updateUser(User user);
 
 }
